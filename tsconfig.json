@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "es6",      
+      "module": "commonjs",
+      "moduleResolution": "node",   
+      "typeRoots": [ "./node_modules/@types"], 
+      "resolveJsonModule": true,    
+      "declaration": false,  
+      "sourceMap": true,
+      "outDir": ".src-js",
+      "removeComments": false,
+      "esModuleInterop": true,      
+      "noImplicitAny": false,
+      "skipLibCheck": true,
+      "strict": true             
+    }
+  }
+  

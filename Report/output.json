@@ -1,0 +1,173 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "payback-anmelden-automation;payback-registration-personal-details-validation",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "PayBack Registration Personal Details Validation",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1027200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "User navigates to PayBack home page",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4640258599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "User selects A PayBack Card",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1156197600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User enters all the details",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 486676099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "Perform all validations on personal details",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 208309900
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 484600
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@payback",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "payback-anmelden-automation;payback-registration-without-validation",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "PayBack Registration without Validation",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 327100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "User navigates to PayBack home page",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 825741600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "User selects A PayBack Card",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1093621100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "User enters all the details",
+            "match": {
+              "location": "stepDefination\\RegisterSteps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 523377200
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 345199
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@payback",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "payback-anmelden-automation",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Payback Anmelden automation",
+    "tags": [
+      {
+        "name": "@payback",
+        "line": 1
+      }
+    ],
+    "uri": "features\\payback.feature"
+  }
+]

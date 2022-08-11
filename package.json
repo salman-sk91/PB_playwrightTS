@@ -1,0 +1,19 @@
+{
+    "name": "paybackui",
+    "version": "1.0.0",
+    "description": "PayBack UI Automation Suite",
+    "author": "Salman Shaikh",
+    "scripts": {
+        "clean": "rimraf .src-js/",
+        "build": "tsc",
+        "test": "npm run clean && npm run build && npx cucumber-js -p local"
+    },
+    "dependencies": {
+        "@cucumber/cucumber": "^8.5.1",
+        "@types/node": "18.6.5",
+        "typescript": "^4.7.4",
+        "ts-node": "10.9.1",
+        "playwright": "1.24.2",
+        "chai": "4.3.6"
+    }
+}
