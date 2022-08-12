@@ -1,24 +1,28 @@
 import { Given, When, Then } from "@cucumber/cucumber";
-import { Anmelden } from "./modules/Anmelden";
 import { Configs } from "../Config/Configs";
+import { AnmeldenPage } from "./modules/AnmeldenPage";
+import { HomePage } from "./modules/HomePage";
 
-let anmeldon: Anmelden = new Anmelden();
+let anmeldonPage: AnmeldenPage = new AnmeldenPage();
+let homePage: HomePage = new HomePage();
 
 Given('User navigates to PayBack home page', async function () {
-    await anmeldon.navigate(Configs.URL);
-    await anmeldon.acceptCookies();
+    await homePage.navigate(Configs.URL);
+    await homePage.acceptCookies();
 });
 
 When('User selects A PayBack Card', async function () {
-    await anmeldon.selectaPBCard();
+    await homePage.clickAnmeldenLink();
+    await homePage.verifySuccessful_Navigation();
+    await anmeldonPage.selectaPBCard();
 });
 
 When('User enters all the details', async function () {
-    await anmeldon.enterDetails();
+    await anmeldonPage.enterDetails();
 });
 
 Then('Perform all validations on personal details', async function () {
-    await anmeldon.performFieldValidations();
+    await anmeldonPage.performFieldValidations();
     console.log("Validation completed successfully...")
 });
 

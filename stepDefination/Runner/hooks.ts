@@ -2,7 +2,7 @@ import { After, Before, BeforeAll, AfterAll, setDefaultTimeout } from "@cucumber
 import playwright from 'playwright';
 import { Configs } from "../../Config/Configs";
 
-setDefaultTimeout( 60 * 1000);
+setDefaultTimeout( 30 * 1000);
 
 BeforeAll(async()=>{
     
