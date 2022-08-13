@@ -9,11 +9,12 @@ let homePage: HomePage = new HomePage();
 Given('User navigates to PayBack home page', async function () {
     await homePage.navigate(Configs.URL);
     await homePage.acceptCookies();
+    await homePage.verifySuccessful_Navigation();
 });
 
 When('User selects A PayBack Card', async function () {
-    await homePage.clickAnmeldenLink();
-    await homePage.verifySuccessful_Navigation();
+    await homePage.clickAnmeldenLink();    
+    await anmeldonPage.verifySuccessful_Navigation();
     await anmeldonPage.selectaPBCard();
 });
 

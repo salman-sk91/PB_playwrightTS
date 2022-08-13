@@ -13,7 +13,7 @@ export class AnmeldenPage implements InterfacePageValidation {
     anmeldenHeaderTxt = "Jetzt mit PAYBACK starten";
 
     async verifySuccessful_Navigation() {
-        let pageHeaderTxt: String = global.page.locator("h3.pb-headline").first().innerText();
+        let pageHeaderTxt: String = await global.page.locator("h3.pb-headline").first().innerText();
         Assert.equal(pageHeaderTxt, this.anmeldenHeaderTxt);
     }
 

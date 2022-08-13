@@ -7,10 +7,10 @@ export class HomePage implements InterfacePageValidation {
     //Page Locators
     accepCookieBtn = "id=onetrust-accept-btn-handler";
     anmeldenLink = "text=Anmelden";
-    homePageTitle = "Jetzt bei PAYBACK Österreich anmelden";
+    homePageTitle = "PAYBACK Österreich: Punkten und belohnen";
 
     async verifySuccessful_Navigation() {
-        let title: String = await global.page.locator("title").innerText();
+        let title: String = await global.page.locator("title").first().innerText();
         Assert.equal(title, this.homePageTitle);
     }
 
