@@ -58,8 +58,11 @@ pipeline {
             
             echo "Exit code:${status}"
            
-           return (status=='0')
-            }
+            if(status=='0'){
+              echo "TRUE"
+              return true
+            }else{
+              echo "False"
            }
       }
       }
