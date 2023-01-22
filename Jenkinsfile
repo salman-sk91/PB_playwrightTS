@@ -34,8 +34,7 @@ pipeline {
              timeout(time: 5, unit: 'MINUTES') {
           waitUntil {
             script {
-              echo 'Validate...'                      
-              sh(script: 'uname', returnStdout: true)
+              echo 'Validate...'                                    
                containerId = bat (script: 'docker ps -aqf \"ancestor=pw$(BUILD_NUMBER)\"',returnStdout: true).trim()
     
               //echo "Git committer email: ${GIT_COMMIT_EMAIL}"
