@@ -48,6 +48,7 @@ pipeline {
 
         stage('Validate 2') {
       steps {            
+        script{
            timeout(time: 5, unit: 'MINUTES') {
           waitUntil {
              def exitcode = -1
@@ -63,6 +64,7 @@ pipeline {
            return (status == 0)
             }
            }
+      }
       }
 } 
     
