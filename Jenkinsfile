@@ -34,7 +34,7 @@ pipeline {
           waitUntil {
             script {
               echo 'Validate...'                            
-              def containerId =  bat "docker ps -aqf 'ancestor=pw$BUILD_NUMBER'"
+              def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
              echo 'Container Id is : '${containerId}
         
             def exitcode = -1
