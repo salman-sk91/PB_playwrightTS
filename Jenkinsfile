@@ -31,18 +31,29 @@ pipeline {
     
  stage('Validate') {
       steps {
-             timeout(time: 5, unit: 'MINUTES') {
-          waitUntil {
+          
             script {
               
               echo 'Validate...'                                    
-               containerId = bat (script: 'docker ps -aqf \"ancestor=pw20\"',returnStdout: true).trim()
+               containerId = bat('docker ps -aqf \"ancestor=pw$BUILD_NUMBER\"',returnStdout: true).trim()
     
               //echo "Git committer email: ${GIT_COMMIT_EMAIL}"
               //def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
               
               echo "Container Id is : ${containerId}"
         
+            
+            }
+          
+        
+         
+            }
+}
+
+/*        stage('Validate 2') {
+      steps {            
+           timeout(time: 5, unit: 'MINUTES') {
+          waitUntil {
              def exitcode = -1
              echo "Init exitcode is : ${exitcode}"
            
@@ -51,12 +62,8 @@ pipeline {
            
            return (exitcode == 0)
             }
-          }
-        }
-         
-            }
-}
-
+} */
+    
     stage('Results') {
       steps {
             echo 'Results are published...'
