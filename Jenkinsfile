@@ -4,10 +4,10 @@ pipeline {
 
   environment {
     TAG = "demo_${env.BRANCH_NAME}_${env.BUILD_NUMBER}"
+    def containerId=0;
   }
 
-  stages {
-     def containerId=0;
+  stages {     
 
     stage("Checkout") {
       steps {
