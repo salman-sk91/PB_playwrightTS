@@ -26,20 +26,7 @@ pipeline {
     stage('Test') {
       steps {
             bat "docker run -d --network=host pw$BUILD_NUMBER npm run test"
-      }
-        post {
-        always {
-          publishHTML target: [
-            allowMissing         : false,
-            alwaysLinkToLastBuild: false,
-            keepAll             : true,
-            reportDir            : 'Report',
-            reportFiles          : 'output.html',
-            reportName           : 'Test Report'
-          ]
-        }
-      }
-            
+      }                   
 }
 
     
@@ -89,6 +76,18 @@ pipeline {
       steps {
             echo 'Results are published...'
             }
+       post {
+        always {
+          publishHTML target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll             : true,
+            reportDir            : '**/Report/*.html',
+            reportFiles          : 'output.html',
+            reportName           : 'Test Report'
+          ]
+        }
+      }
 }
 
 
