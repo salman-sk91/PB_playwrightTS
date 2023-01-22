@@ -59,7 +59,7 @@ pipeline {
             echo "Exit code:${status}"
                        
             
-            if(status.equals('0')){
+            if( status != '0' ){
               echo "TRUE"
               return true
             }else{
