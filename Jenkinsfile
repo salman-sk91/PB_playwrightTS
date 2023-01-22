@@ -14,7 +14,7 @@ pipeline {
       }
     }
 
-    stage("Execute DockerFile") {
+    stage("Build Image") {
       steps {
 
        bat "docker build -t pw$BUILD_NUMBER ."
@@ -22,18 +22,17 @@ pipeline {
         }
    }
 
-    stage('Execute PW Test') {
+    stage('Test') {
       steps {
             bat "docker run -d --network=host pw$BUILD_NUMBER npm run test"
             }
-
-            post {
-                            success {
-                                junit '**/Reports/Output.html'                                      
-                            }
-                        }
 }
 
+    stage('Results') {
+      steps {
+            echo 'Results are published...'
+            }
+}
 
 
 //  stage('Results') {
