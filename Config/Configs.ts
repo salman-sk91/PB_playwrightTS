@@ -3,7 +3,7 @@
 export class Configs{
 
      
- static headless:boolean = false;
+ static headless:boolean = true;
  static URL: String = "https://www.payback.at/";
  
  

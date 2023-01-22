@@ -1,7 +1,7 @@
 @payback
 Feature: Payback Anmelden automation
 
-    Scenario: PayBack Registration Personal Details Validation
+    Scenario: PayBack Registration Personal Details Validation :: TC1001
 
         Given User navigates to PayBack home page
         When User selects A PayBack Card
@@ -9,7 +9,7 @@ Feature: Payback Anmelden automation
         Then Perform all validations on personal details
 
 
-    Scenario: PayBack Registration without Validation
+    Scenario: PayBack Registration without Validation :: TC1002
 
         Given User navigates to PayBack home page
         When User selects A PayBack Card
