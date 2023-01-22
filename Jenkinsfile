@@ -31,13 +31,13 @@ pipeline {
  stage('Validate') {
       steps {
             echo 'Validating...'
-           containerId =  bat docker ps -aqf "ancestor=pw$BUILD_NUMBER"
+           containerId =  bat "docker ps -aqf 'ancestor=pw$BUILD_NUMBER'"
            echo 'Container Id is : '+containerId
         
             exitcode=-1
 
            while(exitcode!=0){
-            exitcode= bat docker inspect containerId --format='{{.State.ExitCode}}'
+            exitcode= bat "docker inspect containerId --format='{{.State.ExitCode}}'"
             echo 'Exit code: '+exitcode
            }
             }
