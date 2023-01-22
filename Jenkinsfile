@@ -35,7 +35,7 @@ pipeline {
           def imageName = "docker ps -aqf \"ancestor=pw${env.BUILD_NUMBER}\""
           echo "Image name ${imageName}"
           
-          def containerId = bat(script: "${imageName}", returnStdout: true).trim()
+          def containerId = bat(script: "${imageName}", returnStdout: true).trim().readLines().drop(1).join(" ")
     
               //echo "Git committer email: ${GIT_COMMIT_EMAIL}"
               //def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
