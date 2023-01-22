@@ -7,6 +7,7 @@ pipeline {
   }
 
   stages {
+     def containerId=0;
 
     stage("Checkout") {
       steps {
@@ -35,7 +36,7 @@ pipeline {
           def imageName = "docker ps -aqf \"ancestor=pw${env.BUILD_NUMBER}\""
           echo "Image name ${imageName}"
           
-          def containerId = bat(script: "${imageName}", returnStdout: true).trim().readLines().drop(1).join(" ")
+          containerId = bat(script: "${imageName}", returnStdout: true).trim().readLines().drop(1).join(" ")
     
               //echo "Git committer email: ${GIT_COMMIT_EMAIL}"
               //def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
@@ -45,19 +46,25 @@ pipeline {
             }
 }
 
-/*        stage('Validate 2') {
+        stage('Validate 2') {
       steps {            
            timeout(time: 5, unit: 'MINUTES') {
           waitUntil {
              def exitcode = -1
              echo "Init exitcode is : ${exitcode}"
            
-              exitcode= bat "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
-            echo 'Exit code: ' +exitcode
+              def getStatus = "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
+            echo "status command: ${getStatus}"
+            
+            status = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")
+            
+            echo 'Exit code: ' +status
            
-           return (exitcode == 0)
+           return (status == 0)
             }
-} */
+           }
+      }
+} 
     
     stage('Results') {
       steps {
