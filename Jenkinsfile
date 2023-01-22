@@ -57,10 +57,9 @@ pipeline {
             def status = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")
             
             echo "Exit code:${status}"
-           
-            int value = status as Integer
+                       
             
-            if(value==0){
+            if(status.equals('0')){
               echo "TRUE"
               return true
             }else{
