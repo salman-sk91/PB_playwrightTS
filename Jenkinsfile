@@ -50,10 +50,7 @@ pipeline {
       steps {            
         script{
            timeout(time: 2, unit: 'MINUTES') {
-          waitUntil {
-             def exitcode = -1
-             echo "Init exitcode is : ${exitcode}"
-           
+          waitUntil {           
               def getStatus = "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
             echo "status command: ${getStatus}"
             
