@@ -54,11 +54,11 @@ pipeline {
               def getStatus = "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
             echo "status command: ${getStatus}"
             
-            status = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")
+            def status = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")
             
             echo "Exit code:${status}"
            
-           return (status == 0)
+           return (status=='0')
             }
            }
       }
