@@ -56,9 +56,9 @@ pipeline {
             
             status = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")
             
-            echo 'Exit code: ' +status
+            echo "Exit code:${status}"
            
-           return (status == '0')
+           return (status == 0)
             }
            }
       }
