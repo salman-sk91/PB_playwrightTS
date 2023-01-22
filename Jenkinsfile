@@ -49,7 +49,7 @@ pipeline {
         stage('Validate 2') {
       steps {            
         script{
-           timeout(time: 5, unit: 'MINUTES') {
+           timeout(time: 2, unit: 'MINUTES') {
           waitUntil {
              def exitcode = -1
              echo "Init exitcode is : ${exitcode}"
@@ -61,7 +61,7 @@ pipeline {
             
             echo 'Exit code: ' +status
            
-           return (status == 0)
+           return (status == '0')
             }
            }
       }
