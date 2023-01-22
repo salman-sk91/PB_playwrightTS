@@ -32,8 +32,10 @@ pipeline {
  stage('Validate') {
       steps {                           
         script{
-          def imageName = "pw$BUILD_NUMBER"
-               def containerId = bat(script: 'docker ps -aqf \"ancestor=$(imageName)\"', returnStdout: true).trim()
+          def imageName = 'docker ps -aqf "pw$BUILD_NUMBER"'
+          echo "Image name ${imageName}"
+          
+          def containerId = bat(script: 'docker ps -aqf \"ancestor=${imageName}\"', returnStdout: true).trim()
     
               //echo "Git committer email: ${GIT_COMMIT_EMAIL}"
               //def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
