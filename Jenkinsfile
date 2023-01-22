@@ -35,13 +35,13 @@ pipeline {
             script {
               echo 'Validate...'                            
               def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
-             echo 'Container Id is : '${containerId}
+             echo 'Container Id is :' containerId
         
             def exitcode = -1
 
            
-            exitcode= bat "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
-            echo 'Exit code: '$exitcode
+              exitcode= bat "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
+            echo 'Exit code: ' +exitcode
            
            return (exitcode == 0)
             }
