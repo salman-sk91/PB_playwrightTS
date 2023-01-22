@@ -32,7 +32,7 @@ pipeline {
  stage('Validate') {
       steps {                           
         script{
-          def imageName = "docker ps -aqf \"pw${env.BUILD_NUMBER}\""
+          def imageName = "docker ps -aqf \"ancestor=pw${env.BUILD_NUMBER}\""
           echo "Image name ${imageName}"
           
           def containerId = bat(script: "${imageName}", returnStdout: true).trim()
