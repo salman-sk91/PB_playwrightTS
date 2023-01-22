@@ -34,11 +34,11 @@ pipeline {
           waitUntil {
             script {
               echo 'Validate...'                            
-              var containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
+              def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
               echo "Container Id is : ${containerId}"
         
-            var exitcode = -1
-
+             def exitcode = -1
+             echo "Init exitcode is : ${exitcode}"
            
               exitcode= bat "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
             echo 'Exit code: ' +exitcode
