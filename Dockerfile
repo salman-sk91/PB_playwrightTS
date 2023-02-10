@@ -26,4 +26,4 @@ RUN chmod 777 -R /temp/salmon/PLAYWRIGHTTS \
 && chmod -R 777 node_modules \
 && echo "--------"
 
-ENTRYPOINT ["/temp/salmon/PLAYWRIGHTTS/start_server.sh"]
+ENTRYPOINT ["sh","/temp/salmon/PLAYWRIGHTTS/start_server.sh"]
