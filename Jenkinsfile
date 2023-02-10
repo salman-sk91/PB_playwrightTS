@@ -4,9 +4,10 @@ pipeline {
 
   environment {
     TAG = "demo_${env.BRANCH_NAME}_${env.BUILD_NUMBER}"
+    def containerId=0;
   }
 
-  stages {
+  stages {     
 
     stage("Checkout") {
       steps {
@@ -58,11 +59,24 @@ pipeline {
             }
           }
 }
-
+       
+    
     stage('Results') {
       steps {
             echo 'Results are published...'
             }
+       post {
+        always {
+          publishHTML target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll             : true,
+            reportDir            : 'Report',
+            reportFiles          : 'output.html',
+            reportName           : 'Test Report'
+          ]
+        }
+      }
 }
 
 
