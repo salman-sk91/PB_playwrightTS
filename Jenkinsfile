@@ -23,9 +23,9 @@ pipeline {
         }
    }
 
-    stage('Test') {
+    stage('Execute Image') {
       steps {
-            bat "docker run -d --network=host pw$BUILD_NUMBER npm run test"
+             bat "docker run --name pw-automation -d --network=host pw$BUILD_NUMBER"
       }                   
 }
 
@@ -33,44 +33,34 @@ pipeline {
  stage('Validate') {
       steps {                           
         script{
-          def imageName = "docker ps -aqf \"ancestor=pw${env.BUILD_NUMBER}\""
-          echo "Image name ${imageName}"
-          
-          containerId = bat(script: "${imageName}", returnStdout: true).trim().readLines().drop(1).join(" ")
-    
-              //echo "Git committer email: ${GIT_COMMIT_EMAIL}"
-              //def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
-              
-              echo "Container Id is : ${containerId}" 
+          def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
+            def maxwait = 15;
+            def testStatus= ''; 
+            for(int i=0;i<maxwait;i++){
+              if(testStatus!='DONE'){
+                  testStatus = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/getstatus\""
+                  echo "Test Status is: ${testStatus}"
+              }
+              if(testStatus == 'DONE'){
+                 echo "Test Status is: ${testStatus}";
+                 break;
+              }
+              if(testStatus == 'FAILED'){
+                 echo "Test Status is: ${testStatus}";
+                 break;
+              }
+              else if(i>maxwait){
+                echo "Test Execution has reached maximum limit, hence breaking";
+                break;
+              }
+              else{
+                sleep(30);
+              }
+            }
+
         }
             }
-}
-
-        stage('Validate 2') {
-      steps {            
-        script{
-           timeout(time: 2, unit: 'MINUTES') {
-          waitUntil {           
-              def getStatus = "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
-            echo "status command: ${getStatus}"
-            
-            def status = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")
-            
-            echo "Exit code:${status}"
-                       
-            
-            if( status != '0' ){
-              echo "TRUE"
-              return true
-            }else{
-              echo "False"
-              return false
-           }
-          }
-      }
-      }
-} 
-        }
+}        
     
     stage('Results') {
       steps {
