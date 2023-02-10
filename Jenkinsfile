@@ -28,8 +28,33 @@ pipeline {
     }
 
     stage('Validations') {
-             
-            def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
+              steps {
+                runTest()
+               }                        
+    }
+           
+    stage('Results') {
+      steps {
+            echo 'Results are published...'
+            }
+       post {
+        always {
+          publishHTML target: [
+            allowMissing         : false,
+            alwaysLinkToLastBuild: false,
+            keepAll             : true,
+            reportDir            : 'Report',
+            reportFiles          : 'output.html',
+            reportName           : 'Test Report'
+          ]
+        }
+      }
+    }
+
+}
+
+def runTest(){
+    def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
             int maxwait = 15;
             def testStatus= ''; 
             for(int i=0;i<maxwait;i++){
@@ -55,25 +80,5 @@ pipeline {
               }
 
             }
-                
-    }
-           
-    stage('Results') {
-      steps {
-            echo 'Results are published...'
-            }
-       post {
-        always {
-          publishHTML target: [
-            allowMissing         : false,
-            alwaysLinkToLastBuild: false,
-            keepAll             : true,
-            reportDir            : 'Report',
-            reportFiles          : 'output.html',
-            reportName           : 'Test Report'
-          ]
-        }
-      }
-    }
 }
 
