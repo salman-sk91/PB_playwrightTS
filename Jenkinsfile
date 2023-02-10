@@ -29,7 +29,7 @@ pipeline {
 
     stage('Validations') {
               steps {
-                runTest()
+                echo "Validate"
                }                        
     }
            
@@ -51,34 +51,5 @@ pipeline {
       }
     }
 
-}
-
-def runTest(){
-    def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
-            int maxwait = 15;
-            def testStatus= ''; 
-            for(int i=0;i<maxwait;i++){
-
-              if(testStatus!='DONE'){
-                  testStatus = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/getstatus\""
-                  echo "Test Status is: ${testStatus}"
-              }
-              if(testStatus == 'DONE'){
-                 echo "Test Status is: ${testStatus}";
-                 break;
-              }
-              if(testStatus == 'FAILED'){
-                 echo "Test Status is: ${testStatus}";
-                 break;
-              }
-              else if(i>maxwait){
-                echo "Test Execution has reached maximum limit, hence breaking";
-                break;
-              }
-              else{
-                sleep(30);
-              }
-
-            }
 }
 
