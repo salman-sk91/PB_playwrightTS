@@ -12,6 +12,8 @@ COPY ./stepDefination /temp/salmon/PLAYWRIGHTTS/stepDefination
 COPY ./cucumber.js /temp/salmon/PLAYWRIGHTTS/cucumber.js
 COPY ./package.json /temp/salmon/PLAYWRIGHTTS/package.json
 COPY ./tsconfig.json /temp/salmon/PLAYWRIGHTTS/tsconfig.json
+COPY ./Service /temp/salmon/PLAYWRIGHTTS/Service
+COPY ./start_server.sh /temp/salmon/PLAYWRIGHTTS/start_server.sh
 #COPY .src-js /temp/salmon/PLAYWRIGHTTS/.src-js
 RUN mkdir -p /temp/salmon/PLAYWRIGHTTS/Report
 
@@ -19,3 +21,9 @@ RUN apt-get update && apt-get -y install libnss3 libatk-bridge2.0-0 libdrm-dev l
 
 RUN npm install
 RUN npx playwright install chrome
+
+RUN chmod 777 -R /temp/salmon/PLAYWRIGHTTS \
+&& chmod -R 777 node_modules \
+&& echo "--------"
+
+CMD /temp/salmon/PLAYWRIGHTTS/start_server.sh

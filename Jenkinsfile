@@ -22,33 +22,41 @@ pipeline {
         }
    }
 
-    stage('Test') {
+    stage('Execute Image') {
       steps {
-            bat "docker run -d --network=host pw$BUILD_NUMBER npm run test"
+            bat "docker run --rm --name pw-automation -d --network=host pw$BUILD_NUMBER"
             }
 }
 
- stage('Validate') {
+ stage('Validations') {
       steps {
-             timeout(time: 5, unit: 'MINUTES') {
-          waitUntil {
-            script {
-              echo 'Validate...'                            
-              def containerId =  bat "docker ps -aqf \"ancestor=pw$BUILD_NUMBER\""
-             echo 'Container Id is : '${containerId}
-        
-            def exitcode = -1
+            def status = bat "docker exec -it pw-automation /bin/sh -c "curl http://localhost:7070/runtest""
+            def maxwait = 15;
+            def testStatus= ''; 
+            for(int i=0;i<maxwait;i++){
 
-           
-            exitcode= bat "docker inspect ${containerId} --format='{{.State.ExitCode}}'"
-            echo 'Exit code: '$exitcode
-           
-           return (exitcode == 0)
+              if(testStatus!='DONE'){
+                  testStatus = bat "docker exec -it pw-automation /bin/sh -c "curl http://localhost:7070/getstatus""
+                  echo "Test Status is: ${testStatus}"
+              }
+              if(testStatus == 'DONE'){
+                 echo "Test Status is: ${testStatus}";
+                 break;
+              }
+              if(testStatus == 'FAILED'){
+                 echo "Test Status is: ${testStatus}";
+                 break;
+              }
+              else if(i>maxwait){
+                echo "Test Execution has reached maximum limit, hence breaking";
+                break;
+              }
+              else{
+                sleep(30);
+              }
+
             }
           }
-        }
-         
-            }
 }
 
     stage('Results') {
