@@ -41,7 +41,7 @@ pipeline {
                     def getStatus = "docker exec -i pw-automation /bin/sh -c \"curl http://localhost:7070/getstatus\""
             echo "status command: ${getStatus}"
             
-            def testStatus = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")                  
+            testStatus = bat(script: "${getStatus}", returnStdout: true).trim().readLines().drop(1).join(" ")                  
             echo "Test Status is: ${testStatus}"
               }
               if(testStatus == 'DONE'){
