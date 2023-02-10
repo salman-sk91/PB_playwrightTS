@@ -12,7 +12,7 @@ export class AnmeldenPage implements InterfacePageValidation {
     firstPBCardTile = "(//div[contains(@class,'swiper-slide-active')]//img)[1]";
     WeiterBtn = "(//span[@class='pb-sign-up__button-text'])[1]";
     anmeldenHeaderTxt = "Jetzt mit PAYBACK starten";
-    PLZerrorTxt = "Bitte geben Sie Ihre PLZ ein";
+    PLZerrorTxt = "Bitte geben Sie Ihre PLZ Salman";
     ORTerrorTxt = "Bitte geben Sie Ihren Wohnort an";
 
     async verifySuccessful_Navigation() {
