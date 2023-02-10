@@ -17,20 +17,18 @@ pipeline {
 
     stage("Build Image") {
       steps {
-
        bat "docker build -t pw$BUILD_NUMBER ."
-
         }
-   }
+    }
 
     stage('Execute Image') {
       steps {
             bat "docker run --rm --name pw-automation -d --network=host pw$BUILD_NUMBER"
             }
-   }
+    }
 
     stage('Validations') {
-      steps {          
+             
             def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
             int maxwait = 15;
             def testStatus= ''; 
@@ -57,11 +55,9 @@ pipeline {
               }
 
             }
-          }
-      
+                
     }
-       
-    
+           
     stage('Results') {
       steps {
             echo 'Results are published...'
