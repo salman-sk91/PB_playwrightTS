@@ -27,12 +27,14 @@ pipeline {
       steps {
             bat "docker run --rm --name pw-automation -d --network=host pw$BUILD_NUMBER"
             }
-}
+   }
 
- stage('Validations') {
+    stage('Validations') {
       steps {
+        script{
+        
             def status = bat "docker exec -it pw-automation /bin/sh -c "curl http://localhost:7070/runtest""
-            def maxwait = 15;
+            int maxwait = 15;
             def testStatus= ''; 
             for(int i=0;i<maxwait;i++){
 
@@ -58,7 +60,8 @@ pipeline {
 
             }
           }
-}
+      }
+    }
        
     
     stage('Results') {
@@ -77,27 +80,6 @@ pipeline {
           ]
         }
       }
-}
-
-
-//  stage('Results') {
-//  steps{
-//        junit '**/target/surefire-reports/TEST-*.xml'
-//        archive 'target/*.jar'l
-//     }
-//    }
-
-
-//  stage('Delete Docker Images') {
-//       steps {
-//
-//            bat "docker-compose -f docker-compose.yml down --rmi all"
-//
-//            bat "docker rmi -f uiprojdockerimage$BUILD_NUMBER"
-//             }
-//                             }
-
     }
-
-  }
+}
 
