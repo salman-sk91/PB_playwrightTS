@@ -30,8 +30,7 @@ pipeline {
    }
 
     stage('Validations') {
-      steps {
-        script{        
+      steps {          
             def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
             int maxwait = 15;
             def testStatus= ''; 
@@ -59,7 +58,7 @@ pipeline {
 
             }
           }
-      }
+      
     }
        
     
