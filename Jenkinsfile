@@ -33,12 +33,12 @@ pipeline {
  stage('Validate') {
       steps {                           
         script{
-          def status = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
+          def status = bat "docker exec -it --interactive --tty pw-automation /bin/sh -c \"curl http://localhost:7070/runtest\""
             def maxwait = 15;
             def testStatus= ''; 
             for(int i=0;i<maxwait;i++){
               if(testStatus!='DONE'){
-                  testStatus = bat "docker exec -it pw-automation /bin/sh -c \"curl http://localhost:7070/getstatus\""
+                  testStatus = bat "docker exec -it --interactive --tty pw-automation /bin/sh -c \"curl http://localhost:7070/getstatus\""
                   echo "Test Status is: ${testStatus}"
               }
               if(testStatus == 'DONE'){
