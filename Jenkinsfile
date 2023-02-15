@@ -15,6 +15,7 @@ pipeline {
       }
     }
 
+try{
     stage("Build Image") {
       steps {
 
@@ -39,7 +40,9 @@ pipeline {
 
         }
             }
-}        
+}  catch(err){
+echo "Failed !!"
+}finally{    
     
     stage('Results') {
       steps {
@@ -57,6 +60,7 @@ pipeline {
           ]
         }
       }
+}
 }
 
 
