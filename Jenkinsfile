@@ -7,7 +7,7 @@ pipeline {
     def containerId=0;
   }
 
-  stages {     
+      
 try{
     stage("Checkout") {
       steps {
@@ -61,7 +61,7 @@ echo "Failed !!"
         }
       }
 }
-}
+
 
 
 //  stage('Results') {
