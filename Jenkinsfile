@@ -100,6 +100,7 @@ pipeline {
               }
               if(testStatus == 'FAILED'){
                  echo "Test Status is: ${testStatus}";
+                 error "Failed scenarios"
                  break;
               }
               else if(i>maxwait){
