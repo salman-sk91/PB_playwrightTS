@@ -7,8 +7,8 @@ pipeline {
     def containerId=0;
   }
 
-      
-try{
+  stages {     
+
     stage("Checkout") {
       steps {
         checkout scm
@@ -40,10 +40,7 @@ try{
         }
             }
 }
-}  catch(err){
-echo "Failed !!"
-}finally{    
-    
+
     stage('Results') {
       steps {
             echo 'Results are published...'
@@ -63,16 +60,7 @@ echo "Failed !!"
 }
 
 
-
-//  stage('Results') {
-//  steps{
-//        junit '**/target/surefire-reports/TEST-*.xml'
-//        archive 'target/*.jar'l
-//     }
-//    }
-
-
-//  stage('Delete Docker Images') {
+//  stage('Delete Container') {
 //       steps {
 //
 //            bat "docker-compose -f docker-compose.yml down --rmi all"
