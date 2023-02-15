@@ -1,5 +1,5 @@
 
-FROM node:16
+FROM node:latest-alpine
 
 FROM mcr.microsoft.com/playwright:v1.16.3-focal
 
