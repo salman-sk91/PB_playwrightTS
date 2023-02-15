@@ -8,14 +8,13 @@ pipeline {
   }
 
   stages {     
-
+try{
     stage("Checkout") {
       steps {
         checkout scm
       }
     }
 
-try{
     stage("Build Image") {
       steps {
 
